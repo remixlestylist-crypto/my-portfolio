@@ -1,0 +1,265 @@
+ /* ==========================================================================
+   GLOBAL.CSS
+   Shared styles used on EVERY page: colors, fonts, reset, body, header/nav,
+   typography, buttons, and general spacing.
+   Footer styling lives separately in footer.css — link both on every page.
+
+   NOTE: No wrapper <div> is used anywhere. header and main are styled
+   directly, since we're keeping the HTML 100% semantic elements.
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. FONTS
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+
+/* --------------------------------------------------------------------------
+   2. COLORS AND SIZES (stored as variables)
+   Used across global.css, footer.css, and every page's own CSS file.
+   -------------------------------------------------------------------------- */
+:root {
+    --color-background: #F7F8FB;
+    --color-text: #141A2E;
+    --color-text-light: #5B6478;
+    --color-accent: #3B4CF0;
+    --color-border: #E2E5EE;
+
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-text: 'Inter', sans-serif;
+    --font-code: 'JetBrains Mono', monospace;
+
+    --max-width: 1200px; /* used by header, main, and footer */
+}
+
+
+/* --------------------------------------------------------------------------
+   3. RESET
+   -------------------------------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+
+/* --------------------------------------------------------------------------
+   4. BODY + STICKY FOOTER SETUP
+   This stacks header/main/footer top to bottom, and forces the page to be
+   at least the full height of the screen. "flex: 1" on main (below) makes
+   it stretch to fill any leftover space, which pushes the footer all the
+   way down to the bottom edge — even on short pages.
+   -------------------------------------------------------------------------- */
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: var(--font-text);
+    color: var(--color-text);
+    background-color: var(--color-background);
+    line-height: 1.6;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+/* --------------------------------------------------------------------------
+   5. TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    line-height: 1.15;
+}
+
+h2 {
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+
+h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+/* Small uppercase label text, used above section headings site-wide
+   (e.g. "ABOUT ME / 01") */
+.section-eyebrow {
+    font-family: var(--font-code);
+    color: var(--color-accent);
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+}
+
+/* Highlighted word inside a heading, e.g. <strong class="text-accent"> */
+.text-accent {
+    color: var(--color-accent);
+}
+
+
+/* --------------------------------------------------------------------------
+   6. HEADER (logo left, nav right)
+   -------------------------------------------------------------------------- */
+header {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 16px 24px;
+    width: 100%;
+
+    display: flex;                  /* puts logo and nav side by side */
+    justify-content: space-between; /* logo on the left, nav on the right */
+    align-items: center;
+
+    border-bottom: 1px solid var(--color-border);
+}
+
+header a.logo {
+    font-family: var(--font-code);
+    color: var(--color-accent);
+    font-size: 18px;
+}
+
+header nav ul {
+    display: flex;
+    gap: 32px;
+}
+
+header nav a {
+    color: var(--color-text-light);
+    font-weight: 500;
+}
+
+header nav a:hover {
+    color: var(--color-text);
+}
+
+
+/* --------------------------------------------------------------------------
+   7. MAIN
+   "flex: 1" is the key part of the sticky-footer trick — see section 4.
+   -------------------------------------------------------------------------- */
+main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   8. BUTTONS
+   -------------------------------------------------------------------------- */
+.btn-primary,
+.btn-secondary {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background-color: var(--color-accent);
+    color: #FFFFFF;
+}
+
+.btn-secondary {
+    border: 1.5px solid var(--color-border);
+    color: var(--color-text);
+}
+
+
+/* --------------------------------------------------------------------------
+   9. GENERAL SPACING
+   A consistent gap between major sections on any page — apply this class
+   to every top-level <section> inside <main> for even rhythm site-wide.
+   -------------------------------------------------------------------------- */
+.section-spacing {
+    padding-block: 64px;
+}
+
+/* ==========================================================================
+   FOOTER.CSS
+   Styles for the shared <footer> — used on every page. Kept separate from
+   global.css so footer styling is easy to find and edit on its own.
+   Relies on the color/font variables defined in global.css, so global.css
+   must be linked BEFORE this file in every page's <head>.
+   -------------------------------------------------------------------------- */
+
+footer {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 48px 24px 24px;
+    width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 32px;
+
+    border-top: 1px solid var(--color-border);
+}
+
+.footer-name {
+    font-family: var(--font-code);
+    color: var(--color-accent);
+    margin-bottom: 8px;
+}
+
+.footer-tagline {
+    color: var(--color-text-light);
+    font-size: 14px;
+    max-width: 280px;
+}
+
+.footer-socials ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.footer-socials a,
+.footer-contact a {
+    color: var(--color-text-light);
+    font-size: 14px;
+}
+
+.footer-copyright {
+    width: 100%;
+    font-size: 13px;
+    color: var(--color-text-light);
+    border-top: 1px solid var(--color-border);
+    padding-top: 16px;
+    margin-top: 16px;
+    text-align: center;
+}
+
+
+
+.service-card,
+.project-card,
+.lesson-card {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 24px;
+    background-color: #FFFFFF;
+}
